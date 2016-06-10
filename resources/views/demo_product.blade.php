@@ -42,7 +42,7 @@
 		  'name': 'Android Warhol T-Shirt',
 		  'category': 'Apparel',
 		  'brand': 'Google',
-		  'variant': 'black'
+		  'variant': 'black',
 	      'price': '21.89',
 	      'quantity': 2
 	  });
