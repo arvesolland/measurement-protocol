@@ -9,22 +9,49 @@
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-79090004-1', 'auto');
+  ga('require', 'ec');
+
+
+  
   ga('send', 'pageview');
 
 </script>
-
-<button onClick="sendDataLayer();">Pay By Credit Card</button>
+<h1>Checkout Page</h1>
+<button onClick="sendDataLayer('credit_card');">Pay By Credit Card</button>
+<button onClick="sendDataLayer('atm_automatic');">Pay By ATM Automatic</button>
+<button onClick="sendDataLayer('bca_klikpay');">Pay By BCA Klikpay</button>
+<button onClick="sendDataLayer('mandiri_klickpay');">Pay By Mandiri Klikpay</button>
+<button onClick="sendDataLayer('climb_clicks');">Pay By Climb Clicks</button>
+<button onClick="sendDataLayer('transfer');">Pay By Transfer</button>
 
 <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 <script type="text/javascript">
-	function sendDataLayer(){
+	function checkout(product) {
+		ga('ec:addProduct', {
+		      'id': 'P12345',
+			  'name': 'Android Warhol T-Shirt',
+			  'category': 'Apparel',
+			  'brand': 'Google',
+			  'variant': 'black'
+		      'price': '21.89',
+		      'quantity': 2
+		});
+		ga('ec:setAction','checkout', {
+		    'step': 1,            // A value of 1 indicates this action is first checkout step.
+		    'option': 'credit_card'      // Used to specify additional info about a checkout stage, e.g. payment method.
+		});
+
+		 ga('send', 'pageview');   // Pageview for payment.html
+	}
+
+
+	function sendDataLayer(payment_method){
 		console.log('sendDataLayer');
 		var test_datalayer_string ='{"event":"purchase","dimension1":"guest","dimension4":"ALL PAYMENT","ecommerce":{"purchase":{"actionField":{"id":"MA1606001144","affiliation":"Online Store","revenue":"994368","tax":0,"shipping":0,"option":"ALL PAYMENT","coupon":"","action":"purchase"},"products":[{"name":"Fragrance Hotel Bugis","id":"957","price":"994368","brand":"Fragrance Hotel Bugis","category":"2 Star","variant":"Singapore","quantity":1,"coupon":"","dimension2":"2016-06-06","dimension3":"2016-06-07","dimension5":"MA1606001144","dimension6":"PENDING","metric1":1}]}}}';
 		var test_client_id = "899621571.1464319615";
 		var test_order_id = 'MA1606001144';
-		var payment_method = 'credit_card';
+		//var payment_method = 'credit_card';
 		var status = 0;
 		jQuery.ajax({
                     url: "api/analyticsdata",

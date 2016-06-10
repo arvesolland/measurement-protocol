@@ -6,9 +6,24 @@ $app->get('/', function () use ($app) {
     return view('welcome');
 });
 
-$app->get('/test', function () use ($app) {
-    //return $app->version();
-    return view('test');
+$app->get('/demo', function () use ($app) {
+	return view('demo');
+});
+
+$app->get('/demo_product', function () use ($app) {
+	return view('demo_product');
+});
+
+$app->get('/demo_cart', function () use ($app) {
+	return view('demo_cart');
+});
+
+$app->get('/demo_checkout', function () use ($app) {
+	return view('demo_checkout');
+});
+
+$app->get('/demo_payment', function () use ($app) {
+	return view('demo_payment');
 });
 
 // $app->get('api/storedatalayer', function () use ($app) {
