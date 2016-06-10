@@ -12,9 +12,21 @@
   ga('create', 'UA-79090004-1', 'auto');
   ga('require', 'ec');
 
+   ga('ec:addProduct', {
+	      'id': 'P12345',
+		  'name': 'Android Warhol T-Shirt',
+		  'category': 'Apparel',
+		  'brand': 'Google',
+		  'variant': 'black',
+	      'price': '21.89',
+	      'quantity': 2
+	});
+	ga('ec:setAction','checkout', {
+	    'step': 1,            // A value of 1 indicates this action is first checkout step.
+	    'option': 'credit_card'      // Used to specify additional info about a checkout stage, e.g. payment method.
+	});
 
-  
-  ga('send', 'pageview');
+	 ga('send', 'pageview');   // Pageview for payment.html
 
 </script>
 <h1>Checkout Page</h1>

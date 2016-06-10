@@ -37,8 +37,8 @@
 	ga('send', 'pageview');     // Send transaction data with initial pageview.
 
 </script>
-<h1>Cart Page</h1>
-<a href="demo_checkout">Go To Checkout</a>
+<h1>Payment Complete Page</h1>
+<a href="demo">Go To Start</a>
 
 <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 

@@ -24,7 +24,7 @@
 
 	ga('ec:setAction', 'detail');
 
-  ga('send', 'pageview');
+    ga('send', 'pageview');
 
 </script>
 <h1>Product View Page</h1>
