@@ -34,7 +34,7 @@ function storeAnalyticsData(){
 			var client_id = ga.getAll()[0].get('clientId');
 			//store data in API service
 			jQuery.ajax({
-			        url: "http://54.252.133.117/api/analyticsdata",
+			        url: "https://connectionmasters.com.au/api/analyticsdata",
 			        type: "POST",
 			        data: { 'datalayer' : data_obj, 'client_id': client_id, 'ref_id': order_id, 'payment_method': 'credit_card', 'status': status },
 			        success: function(data) {

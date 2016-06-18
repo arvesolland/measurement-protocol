@@ -41,7 +41,17 @@ class AnalyticsdataController extends Controller
  
     public function saveAnalyticsdata(Request $request){
  
-        $analyticsdata = Analyticsdata::create($request->all());
+        print '<pre>';
+        print_r($request);
+        print '</pre>';
+
+        $analyticsdata = new Analyticsdata;
+        $analyticsdata->ref_id = $request->ref_id;
+        $analyticsdata->client_id = $request->client_id;
+        $analyticsdata->payment_method = $request->payment_method;
+        $analyticsdata->datalayer = json_encode($request->datalayer);
+        $analyticsdata->status = 0;
+        $analyticsdata->save();
  
         return response()->json($analyticsdata);
  
