@@ -4,10 +4,14 @@
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
     "type": "project",
+    "minimum-stability":"dev",
     "require": {
         "php": ">=5.5.9",
         "laravel/lumen-framework": "5.2.*",
-        "vlucas/phpdotenv": "~2.2"
+        "vlucas/phpdotenv": "~2.2",
+        "symfony/finder": "3.0.6",
+        "symfony/event-dispatcher": "2.8.*",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

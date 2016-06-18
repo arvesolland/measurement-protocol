@@ -10,12 +10,23 @@ class ComposerStaticInit410cc3f1a3b27e129bf2b8ececf81fa5
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
-        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
+        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'bee9632da3ca00a99623b9c35d0c4f8b' => __DIR__ . '/..' . '/laravel/lumen-framework/src/helpers.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'W' => 
+        array (
+            'Webmozart\\Assert\\' => 17,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Util\\' => 22,
@@ -30,6 +41,11 @@ class ComposerStaticInit410cc3f1a3b27e129bf2b8ececf81fa5
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\Console\\' => 26,
+        ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
         ),
         'M' => 
         array (
@@ -64,6 +80,12 @@ class ComposerStaticInit410cc3f1a3b27e129bf2b8ececf81fa5
             'Illuminate\\Broadcasting\\' => 24,
             'Illuminate\\Auth\\' => 16,
         ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
+        ),
         'F' => 
         array (
             'FastRoute\\' => 10,
@@ -86,6 +108,16 @@ class ComposerStaticInit410cc3f1a3b27e129bf2b8ececf81fa5
     );
 
     public static $prefixDirsPsr4 = array (
+        'phpDocumentor\\Reflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'Webmozart\\Assert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
         'Symfony\\Polyfill\\Util\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-util',
@@ -133,6 +165,14 @@ class ComposerStaticInit410cc3f1a3b27e129bf2b8ececf81fa5
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Monolog\\' => 
         array (
@@ -230,6 +270,18 @@ class ComposerStaticInit410cc3f1a3b27e129bf2b8ececf81fa5
         array (
             0 => __DIR__ . '/..' . '/illuminate/auth',
         ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
@@ -261,19 +313,8 @@ class ComposerStaticInit410cc3f1a3b27e129bf2b8ececf81fa5
     );
 
     public static $prefixesPsr0 = array (
-        'p' => 
-        array (
-            'phpDocumentor' => 
-            array (
-                0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            ),
-        ),
         'P' => 
         array (
-            'Psr\\Log\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/psr/log',
-            ),
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
@@ -681,6 +722,7 @@ class ComposerStaticInit410cc3f1a3b27e129bf2b8ececf81fa5
         'PHP_Token_UNSET' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_UNSET_CAST' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_USE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PHP_Token_USE_FUNCTION' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_VAR' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_VARIABLE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_WHERE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',

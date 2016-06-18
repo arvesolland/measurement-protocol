@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test Page</title>
+	<title>Checkout Page</title>
 </head>
 <body>
 <script>
@@ -39,28 +39,10 @@
 
 <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 <script type="text/javascript">
-	function checkout(product) {
-		ga('ec:addProduct', {
-		      'id': 'P12345',
-			  'name': 'Android Warhol T-Shirt',
-			  'category': 'Apparel',
-			  'brand': 'Google',
-			  'variant': 'black'
-		      'price': '21.89',
-		      'quantity': 2
-		});
-		ga('ec:setAction','checkout', {
-		    'step': 1,            // A value of 1 indicates this action is first checkout step.
-		    'option': 'credit_card'      // Used to specify additional info about a checkout stage, e.g. payment method.
-		});
-
-		 ga('send', 'pageview');   // Pageview for payment.html
-	}
-
-
+	
 	function sendDataLayer(payment_method){
-		console.log('sendDataLayer');
-		var test_datalayer_string ='{"event":"purchase","dimension1":"guest","dimension4":"ALL PAYMENT","ecommerce":{"purchase":{"actionField":{"id":"MA1606001144","affiliation":"Online Store","revenue":"994368","tax":0,"shipping":0,"option":"ALL PAYMENT","coupon":"","action":"purchase"},"products":[{"name":"Fragrance Hotel Bugis","id":"957","price":"994368","brand":"Fragrance Hotel Bugis","category":"2 Star","variant":"Singapore","quantity":1,"coupon":"","dimension2":"2016-06-06","dimension3":"2016-06-07","dimension5":"MA1606001144","dimension6":"PENDING","metric1":1}]}}}';
+		
+		var test_datalayer_string = '{"dimension1":"guest","event":"checkout","ecommerce":{"checkout":{"actionField":{"step":1,"option":"ALL PAYMENT","action":"checkout"},"products":[{"name":"Kuta Central Park ","id":"118","price":"288393","brand":"Kuta Central Park ","category":"4 Star","variant":"Bali","quantity":1,"dimension2":"2016-06-15","dimension3":"2016-06-16","dimension5":"MA1606008222","dimension6":"PENDING","metric1":1}]}}}';
 		var test_client_id = "899621571.1464319615";
 		var test_order_id = 'MA1606001144';
 		//var payment_method = 'credit_card';
@@ -70,22 +52,50 @@
                     type: "POST",
                     data: { 'datalayer' : test_datalayer_string, 'client_id': test_client_id, 'ref_id': test_order_id, 'payment_method': payment_method, 'status': status },
                     success: function(data) {
-                        
-                        //data = jQuery.parseJSON(data);
+                    	alert('Analytics data has now been stored in Web Service for later use.');
                         console.log(data);
-                        //alert(data.message)
-                        //location.reload();
-                        
                     }
                 });
 	}
-	//ga.getAll()[0].get('clientId'); //"899621571.1464319615"
-	//ga.getAll()[0].get('trackingId'); //"UA-  -1"
-	//var full_datalayer_string = '"[{"dimension1":"guest","event":"checkout","ecommerce":{"checkout":{"actionField":{"step":1,"option":"ALL PAYMENT","action":"checkout"},"products":[{"name":"Kuta Central Park ","id":"118","price":"288393","brand":"Kuta Central Park ","category":"4 Star","variant":"Bali","quantity":1,"dimension2":"2016-06-13","dimension3":"2016-06-14","dimension5":"MA1606005807","dimension6":"PENDING","metric1":1}]}}},{"event":"purchase","dimension1":"guest","dimension4":"ALL PAYMENT","ecommerce":{"purchase":{"actionField":{"id":"MA1606005807","affiliation":"Online Store","revenue":"288393","tax":0,"shipping":0,"option":"ALL PAYMENT","coupon":"","action":"purchase"},"products":[{"name":"Kuta Central Park ","id":"118","price":"288393","brand":"Kuta Central Park ","category":"4 Star","variant":"Bali","quantity":1,"coupon":"","dimension2":"2016-06-13","dimension3":"2016-06-14","dimension5":"MA1606005807","dimension6":"PENDING","metric1":1}]}}},{"gtm.start":1465516317892,"event":"gtm.js"},{"event":"gtm.dom"},{"event":"gtm.load"},{"gtm.element":{},"gtm.elementClasses":"","gtm.elementId":"full-name","gtm.elementTarget":"","event":"gtm.click","gtm.elementUrl":""},{"gtm.element":{},"gtm.elementClasses":"","gtm.elementId":"email","gtm.elementTarget":"","event":"gtm.click","gtm.elementUrl":""},{"gtm.element":{},"gtm.elementClasses":"","gtm.elementId":"phone-number","gtm.elementTarget":"","event":"gtm.click","gtm.elementUrl":""},{"gtm.element":{},"gtm.elementClasses":"btn-payment-step button-next","gtm.elementId":"","gtm.elementTarget":"","event":"gtm.click","gtm.elementUrl":""},{"gtm.element":{},"gtm.elementClasses":"btn-payment-step button-next","gtm.elementId":"","gtm.elementTarget":"","event":"gtm.click","gtm.elementUrl":""},{"gtm.element":{},"gtm.elementClasses":"","gtm.elementId":"","gtm.elementTarget":"","event":"gtm.click","gtm.elementUrl":"https://www.misteraladin.com/checkout?uniqueid=139bacf3-2e9d-11e6-8a88-065873a38165#tab-content-atm"}]"';
-	var test_datalayer_string ='{"event":"purchase","dimension1":"guest","dimension4":"ALL PAYMENT","ecommerce":{"purchase":{"actionField":{"id":"MA1606001144","affiliation":"Online Store","revenue":"994368","tax":0,"shipping":0,"option":"ALL PAYMENT","coupon":"","action":"purchase"},"products":[{"name":"Fragrance Hotel Bugis","id":"957","price":"994368","brand":"Fragrance Hotel Bugis","category":"2 Star","variant":"Singapore","quantity":1,"coupon":"","dimension2":"2016-06-06","dimension3":"2016-06-07","dimension5":"MA1606001144","dimension6":"PENDING","metric1":1}]}}}';
-	var test_datalayer_object = JSON.parse(test_datalayer_string);
-	//var full_datalayer_object = JSON.parse(full_datalayer_string);
-	console.log(test_datalayer_object);
+	
+</script>
+
+<script type="text/javascript">
+	function storeAnalyticsData(){
+		//This function extracts neccessary datalayer information from checkout page, 
+		//and creates an ajax request that can store this information for later use
+		//Should be implemented on last part of checkout process that is on site
+		
+		var data_obj = null;
+		var found = false;
+		for (var prop in dataLayer) {
+		   	if( !found && dataLayer[prop]['ecommerce']['purchase'] !== null && typeof dataLayer[prop]['ecommerce']['purchase'] === 'object'){
+		  	   	//this is a datalayer object that contains the neccessary product information 
+		  	   	data_obj = dataLayer[prop]['ecommerce']['purchase'];
+		  	   	found = true;
+		   	}
+		  
+		}
+
+		if( data_obj !== null && typeof data_obj === 'object'){
+		    console.log(data_obj);
+		    //get order id
+		    var order_id = data_obj['products'][0]['dimension5'];
+			//get client id (analytics session)
+			var client_id = ga.getAll()[0].get('clientId');
+			//store data in API service
+			jQuery.ajax({
+			        url: "http://54.252.133.117api/analyticsdata",
+			        type: "POST",
+			        data: { 'datalayer' : data_obj, 'client_id': client_id, 'ref_id': order_id, 'payment_method': 'credit_card', 'status': status },
+			        success: function(data) {
+			            //console.log(data);
+			        }
+			 });
+		}
+	}
+
+	
 </script>
 
 </body>

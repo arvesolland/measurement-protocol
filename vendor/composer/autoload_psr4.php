@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Symfony\\Polyfill\\Util\\' => array($vendorDir . '/symfony/polyfill-util'),
     'Symfony\\Polyfill\\Php56\\' => array($vendorDir . '/symfony/polyfill-php56'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
@@ -18,6 +20,8 @@ return array(
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Laravel\\Lumen\\' => array($vendorDir . '/laravel/lumen-framework/src'),
     'Illuminate\\View\\' => array($vendorDir . '/illuminate/view'),
@@ -42,6 +46,9 @@ return array(
     'Illuminate\\Bus\\' => array($vendorDir . '/illuminate/bus'),
     'Illuminate\\Broadcasting\\' => array($vendorDir . '/illuminate/broadcasting'),
     'Illuminate\\Auth\\' => array($vendorDir . '/illuminate/auth'),
+    'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
+    'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
+    'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),

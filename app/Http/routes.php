@@ -34,6 +34,7 @@ $app->get('api/processorder', function () use ($app) {
     return 'processOrder';
 });
 
+$app->get('/testhit','AnalyticsdataController@sendAnalyticsHit');
 
 $app->post('api/storedata','AnalyticsdataController@storeDatalayer');
 

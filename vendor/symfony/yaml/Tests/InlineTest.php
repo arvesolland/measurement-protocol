@@ -277,6 +277,24 @@ class InlineTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Not quoting a scalar starting with the "%" indicator character is deprecated since Symfony 3.1 and will throw a ParseException in 4.0.', $deprecations[0]);
     }
 
+    /**
+     * @dataProvider getDataForIsHash
+     */
+    public function testIsHash($array, $expected)
+    {
+        $this->assertSame($expected, Inline::isHash($array));
+    }
+
+    public function getDataForIsHash()
+    {
+        return array(
+            array(array(), false),
+            array(array(1, 2, 3), false),
+            array(array(2 => 1, 1 => 2, 0 => 3), true),
+            array(array('foo' => 1, 'bar' => 2), true),
+        );
+    }
+
     public function getTestsForParse()
     {
         return array(
@@ -286,11 +304,17 @@ class InlineTest extends \PHPUnit_Framework_TestCase
             array('true', true),
             array('12', 12),
             array('-12', -12),
+            array('1_2', 12),
+            array('_12', '_12'),
+            array('12_', 12),
             array('"quoted string"', 'quoted string'),
             array("'quoted string'", 'quoted string'),
             array('12.30e+02', 12.30e+02),
+            array('123.45_67', 123.4567),
             array('0x4D2', 0x4D2),
+            array('0x_4_D_2_', 0x4D2),
             array('02333', 02333),
+            array('0_2_3_3_3', 02333),
             array('.Inf', -log(0)),
             array('-.Inf', log(0)),
             array("'686e444'", '686e444'),
@@ -438,10 +462,15 @@ class InlineTest extends \PHPUnit_Framework_TestCase
             array('false', false),
             array('true', true),
             array('12', 12),
+            array("'1_2'", '1_2'),
+            array('_12', '_12'),
+            array("'12_'", '12_'),
             array("'quoted string'", 'quoted string'),
             array('!!float 1230', 12.30e+02),
             array('1234', 0x4D2),
             array('1243', 02333),
+            array("'0x_4_D_2_'", '0x_4_D_2_'),
+            array("'0_2_3_3_3'", '0_2_3_3_3'),
             array('.Inf', -log(0)),
             array('-.Inf', log(0)),
             array("'686e444'", '686e444'),
@@ -483,6 +512,8 @@ class InlineTest extends \PHPUnit_Framework_TestCase
             array('[foo, { bar: foo, foo: [foo, { bar: foo }] }, [foo, { bar: foo }]]', array('foo', array('bar' => 'foo', 'foo' => array('foo', array('bar' => 'foo'))), array('foo', array('bar' => 'foo')))),
 
             array('[foo, \'@foo.baz\', { \'%foo%\': \'foo is %foo%\', bar: \'%foo%\' }, true, \'@service_container\']', array('foo', '@foo.baz', array('%foo%' => 'foo is %foo%', 'bar' => '%foo%'), true, '@service_container')),
+
+            array('{ foo: { bar: { 1: 2, baz: 3 } } }', array('foo' => array('bar' => array(1 => 2, 'baz' => 3)))),
         );
     }
 
