@@ -10,11 +10,8 @@ use GuzzleHttp\Client;
 class AnalyticsdataController extends Controller
 {
      public function index(){
- 
         $analyticsdata  = Analyticsdata::all();
- 
         return response()->json($analyticsdata);
- 
     }
 
     
@@ -40,10 +37,6 @@ class AnalyticsdataController extends Controller
     }
  
     public function saveAnalyticsdata(Request $request){
- 
-        print '<pre>';
-        print_r($request);
-        print '</pre>';
 
         $analyticsdata = new Analyticsdata;
         $analyticsdata->ref_id = $request->ref_id;

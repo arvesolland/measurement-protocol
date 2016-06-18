@@ -5,6 +5,7 @@ function storeAnalyticsData(){
 	
 	var data_obj = null;
 	var found = false;
+
 	for (var prop in dataLayer) {
 		if( !found && dataLayer[prop]['ecommerce'] !== null && typeof dataLayer[prop]['ecommerce'] !== 'undefined'){
 		   	if( !found && dataLayer[prop]['ecommerce']['purchase'] !== null && typeof dataLayer[prop]['ecommerce']['purchase'] === 'object'){
@@ -34,9 +35,9 @@ function storeAnalyticsData(){
 			var client_id = ga.getAll()[0].get('clientId');
 			//store data in API service
 			jQuery.ajax({
-			        url: "https://connectionmasters.com.au/api/analyticsdata",
+			        url: "https://connectionmasters.com.au/api/analyticsdata", //this is a demo site for this api
 			        type: "POST",
-			        data: { 'datalayer' : data_obj, 'client_id': client_id, 'ref_id': order_id, 'payment_method': 'credit_card', 'status': status },
+			        data: { 'datalayer' : data_obj, 'client_id': client_id, 'ref_id': order_id, 'payment_method': 'credit_card', 'status': 0 },
 			        success: function(data) {
 			            console.log(data);
 			        }

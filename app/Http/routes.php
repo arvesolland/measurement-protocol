@@ -1,11 +1,15 @@
 <?php
-
-
 $app->get('/', function () use ($app) {
-    //return $app->version();
     return view('welcome');
 });
 
+//These are the important routes to use here....
+$app->get('api/processorder/{id}','AnalyticsdataController@processOrder');
+$app->post('api/analyticsdata','AnalyticsdataController@saveAnalyticsdata');
+$app->post('api/storedata','AnalyticsdataController@saveAnalyticsdata'); //same action - additional route
+
+
+//These routes are just for testing
 $app->get('/demo', function () use ($app) {
 	return view('demo');
 });
@@ -26,17 +30,17 @@ $app->get('/demo_payment', function () use ($app) {
 	return view('demo_payment');
 });
 
-$app->get('api/processorder/{id}','AnalyticsdataController@processOrder');
+
 
 $app->get('/testhit','AnalyticsdataController@sendAnalyticsHit');
 
-$app->post('api/storedata','AnalyticsdataController@storeDatalayer');
+
 
 $app->get('api/analyticsdata','AnalyticsdataController@index');
  
 $app->get('api/analyticsdata/{id}','AnalyticsdataController@getAnalytcisdata');
  
-$app->post('api/analyticsdata','AnalyticsdataController@saveAnalyticsdata');
+
  
 $app->put('api/analyticsdata/{id}','AnalyticsdataController@updateAnalyticsdata');
  
