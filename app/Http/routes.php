@@ -26,13 +26,7 @@ $app->get('/demo_payment', function () use ($app) {
 	return view('demo_payment');
 });
 
-// $app->get('api/storedatalayer', function () use ($app) {
-//     return 'storeOrder';
-// });
-
-$app->get('api/processorder', function () use ($app) {
-    return 'processOrder';
-});
+$app->get('api/processorder/{id}','AnalyticsdataController@processOrder');
 
 $app->get('/testhit','AnalyticsdataController@sendAnalyticsHit');
 

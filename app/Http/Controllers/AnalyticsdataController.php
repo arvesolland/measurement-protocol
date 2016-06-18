@@ -17,18 +17,19 @@ class AnalyticsdataController extends Controller
  
     }
 
-    public function storeDatalayer(Request $request){
- 
-        
-        print_r($request['datalayer']);
-        print_r($request['ref_id']);
-        print_r($request['client_id']);
-        print_r($request['payment_method']);
-        
- 
-        return;
-        //return response()->json($analyticsdata);
- 
+    
+
+    public function processOrder(String $id){
+
+        $analyticsdata = Analyticsdata::where('ref_id', '=', $id)->where('status', '=', 0)->first();
+        if ($analyticsdata){
+            $this->sendAnalyticsHit($analyticsdata);
+             //update database to set send status to 1
+            $analyticsdata->status = true;
+            $analyticsdata->save();
+            return response()->json('Order ID Processed - Hit sent to Google Analytics');    
+        }
+        return response()->json('Error: Order id not found');
     }
  
     public function getAnalytcisdata($id){
@@ -121,16 +122,24 @@ class AnalyticsdataController extends Controller
         return $hit_payload_array;
     }
 
-    public function buildHitPayloadStringFromDataLayer($datalayer_json){
+    public function buildHitPayloadStringFromDataLayer(Analyticsdata $analyticsdata_record){
         //sample data
         $analyticsData = [];
         $analyticsdata['client_id'] = '899621571.1464319615';
         $analyticsdata['ref_id'] = 'MA1606008222';
-        $analyticsdata['payment_method'] = 'Credit Card';
+        $analyticsdata['payment_method'] = 'Credit Card';  
+        
+        //real data
+        $analyticsdata['client_id'] = $analyticsdata_record->client_id;
+        $analyticsdata['ref_id'] = $analyticsdata_record->ref_id;
+        $analyticsdata['payment_method'] = $analyticsdata_record->payment_method;     
 
+        //test data 
         $datalayer_json = '{"dimension1":"guest","event":"checkout","ecommerce":{"checkout":{"actionField":{"step":1,"option":"ALL PAYMENT","action":"checkout"},"products":[{"name":"Kuta Central Park ","id":"118","price":"288393","brand":"Kuta Central Park ","category":"4 Star","variant":"Bali","quantity":1,"dimension2":"2016-06-15","dimension3":"2016-06-16","dimension5":"MA1606008222","dimension6":"PENDING","metric1":1}]}}}';
+        //real data
         $datalayer_array = json_decode($datalayer_json);
         
+        print 'Stored Datalayer Info:';
         print '<pre>';
         print_r($datalayer_array);
         print '</pre>';
@@ -189,11 +198,11 @@ class AnalyticsdataController extends Controller
 
     }
 
-    public function sendAnalyticsHit(){
+    public function sendAnalyticsHit(Analyticsdata $analyticsdata_record){
 
-        print '<p>Start</p>';
-
-        $hit_payload = $this->buildHitPayloadStringFromDataLayer('');
+        $hit_payload = $this->buildHitPayloadStringFromDataLayer($analyticsdata_record);
+        
+        print 'Generated Hit payload to be sent to google analytics:';
         print '<pre>'.$hit_payload.'</pre>';
         //$hit_payload = 'v=1&t=event&tid=UA-79090004-1&cid=5551233&dh=54.252.133.117&ti=T12345&ta=Mister%20Aladdin&tr=1000.00&tt=100.00&ts=0&tcc=SUMMER2013&pa=purchase&pr1id=P12345&pr1nm=Arves%20Module&pr1ca=Software&pr1br=Invenire&pr1va=Zip&pr1ps=1&dp=document_path_here&dt=doc_title&ec=Ecommerce&ea=Payment%20Confirmation 1';
         
@@ -205,12 +214,14 @@ class AnalyticsdataController extends Controller
             'body' => $hit_payload
         ]);
 
-       
+        print 'Google Analytics Response:';
         print '<pre>';
         print_r($response);
         print '</pre>';
+
+        return true;
        
-        print '<p>Done</p>';
+        
 
     }
 }
